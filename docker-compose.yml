@@ -1,0 +1,26 @@
+services:
+  influxdb3:
+    image: influxdb:3-core
+    container_name: influxdb3_container
+    command: influxdb3 serve --node-id node1 --object-store file --data-dir /tmp/influxdb3_data --without-auth
+    ports:
+      - "8181:8181"
+
+  influxdb3_explorer:
+    image: influxdata/influxdb3-ui:latest
+    container_name: influxdb3_ui_container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - influxdb3
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_container
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - influxdb3
