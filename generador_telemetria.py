@@ -11,7 +11,7 @@ DATABASE = "trafico_raw"
 client = InfluxDBClient(url=URL, token=TOKEN, org=ORG)
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
-print("🚀 Generador enviando datos a InfluxDB 3.0 (Puerto 8181)...")
+print(" Generador enviando datos a InfluxDB 3.0 (Puerto 8181)...")
 
 dispositivos = [{"name": "router1", "base_lat": 15.0}, {"name": "router2", "base_lat": 25.0}]
 
